@@ -28,6 +28,7 @@ import java.util.UUID;
 import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.TestCase.assertNotNull;
 
+@Ignore
 public class BarnValidationFlowPocApplicationTest {
     @Rule
     public final TestPipeline testPipeline = TestPipeline.create();

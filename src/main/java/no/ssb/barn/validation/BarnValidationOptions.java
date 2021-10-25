@@ -36,5 +36,9 @@ public interface BarnValidationOptions extends PipelineOptions, StreamingOptions
 
     void setTextWritePrefix(ValueProvider<String> value);
 
+    @Description("Filename prefix of output files.")
+    @Validation.Required
+    String getOutput();
 
+    void setOutput(String value);
 }
