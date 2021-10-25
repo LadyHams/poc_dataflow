@@ -30,6 +30,7 @@ public class BarnValidationFlowPocApplication {
                 .apply("convert to JSON and check dato", ParDo.of(new DoFn<String, String>() {
                     ObjectMapper jacksonObjMapper = new ObjectMapper();
 
+                    @ProcessElement
                     public void processElement(ProcessContext c) throws Exception {
                         String Barnevern = (String) c.element();
 
@@ -48,7 +49,7 @@ public class BarnValidationFlowPocApplication {
                         }
 
                         String jsonString = jsonNode.asText();
-                        //c.output(jsonString);
+                        c.output(jsonString);
                     }
                 }))
                 .apply("Write results", TextIO.write().to(NestedValueProvider.of(
