@@ -48,7 +48,7 @@ public class BarnValidationFlowPocApplication {
                         }
 
                         String jsonString = jsonNode.asText();
-                        c.output(jsonString);
+                        //c.output(jsonString);
                     }
                 }))
                 .apply("Write results", TextIO.write().to(NestedValueProvider.of(
