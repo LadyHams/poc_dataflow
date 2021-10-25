@@ -26,7 +26,7 @@ public class BarnValidationFlowPocApplication {
 
         Pipeline pipeline = Pipeline.create(options);
 
-        pipeline.apply(TextIO.read().from(options.getInputTopic()))
+        pipeline.apply(TextIO.read().from(options.getInputFile()))
                 .apply("convert to JSON and check dato", ParDo.of(new DoFn<String, String>() {
                     ObjectMapper jacksonObjMapper = new ObjectMapper();
 
