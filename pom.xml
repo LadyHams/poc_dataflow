@@ -39,7 +39,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.example.dataflow.templates.WordCount</mainClass>
+                            <mainClass>no.ssb.barn.BarnValidationFlowPocApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
