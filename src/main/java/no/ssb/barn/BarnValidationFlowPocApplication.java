@@ -3,6 +3,8 @@ package no.ssb.barn;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import no.ssb.barn.validation.BarnValidationOptions;
+import org.apache.beam.sdk.io.FileIO;
+import org.apache.beam.sdk.io.xml.XmlIO;
 import org.apache.beam.sdk.options.ValueProvider.NestedValueProvider;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
@@ -16,6 +18,8 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+import static org.apache.beam.sdk.transforms.ParDo.*;
+
 public class BarnValidationFlowPocApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(BarnValidationFlowPocApplication.class);
@@ -26,8 +30,9 @@ public class BarnValidationFlowPocApplication {
 
         Pipeline pipeline = Pipeline.create(options);
 
-        pipeline.apply(TextIO.read().from(options.getInputFile()))
-                .apply("convert to JSON and check dato", ParDo.of(new DoFn<String, String>() {
+        pipeline.
+                apply(TextIO.read().from(options.getInputFile()))
+                .apply("convert to JSON and check dato", of(new DoFn<String, String>() {
                     ObjectMapper jacksonObjMapper = new ObjectMapper();
 
                     @ProcessElement

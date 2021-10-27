@@ -17,7 +17,7 @@ public interface BarnValidationOptions extends PipelineOptions, StreamingOptions
 
     // Optional argument with a default value.
     @Description("Google Cloud Storage file pattern glob of the file(s) to read from")
-    @Default.String("gs://hams_ssb_proto/input/sample.xml")
+    @Default.String("gs://hams_ssb_proto/input/xml_sample_new_ver.xml")
     ValueProvider<String> getInputFile();
 
     void setInputFile(ValueProvider<String> value);
