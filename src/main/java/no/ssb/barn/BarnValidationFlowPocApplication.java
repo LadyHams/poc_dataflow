@@ -24,22 +24,31 @@ public class BarnValidationFlowPocApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(BarnValidationFlowPocApplication.class);
 
+    // file validation as options
     public static void main(String[] args) throws IOException  {
         BarnValidationOptions options = PipelineOptionsFactory.fromArgs(args)
                 .withValidation().as(BarnValidationOptions.class);
 
+        // create file
         Pipeline pipeline = Pipeline.create(options);
 
         pipeline.
-                apply(TextIO.read().from(options.getInputFile()))
-                .apply("convert to JSON and check dato", of(new DoFn<String, String>() {
+                apply(TextIO.read().from(options.getInputFile())) // file read from option : it work
+                .apply("convert to JSON and check dato", of(new DoFn<String, String>() { // error comes from line 37
                     ObjectMapper jacksonObjMapper = new ObjectMapper();
 
                     @ProcessElement
                     public void processElement(ProcessContext c) throws Exception {
+
+                        LOG.info("comes here in process element");
+
                         String Barnevern = (String) c.element();
 
+                        LOG.info("get element as string ");
+
                         JsonNode jsonNode = jacksonObjMapper.readTree(Barnevern);
+    
+                        LOG.info("map as json node ");
 
                         try {
                             if (jsonNode.has("StartDato") && !jsonNode.isEmpty()) {
